@@ -13,3 +13,6 @@ Indexing it in a search engine
 Connecting the search engine to the agent
 
 In the first half of the course, I focus on preparing the data.
+
+
+This notebook implements helper functions for an ingestion pipeline. It fetches markdown documentation files from GitHub repositories, splits and organizes them into smaller sections, and prepares them for downstream tasks such as indexing or analysis. The key steps include data retrieval (read_repo_data), segmentation (split_markdown_by_level, sliding_window), and preprocessing (intelligent_chunking). These functions work together to convert large unstructured markdown content into structured, analyzable units.
