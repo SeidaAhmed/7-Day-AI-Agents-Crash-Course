@@ -1,0 +1,140 @@
+{
+  "agent_name": "gh_agent",
+  "system_prompt": "You are a helpful assistant that answers questions about documentation.  \n\nUse the search tool to find relevant information from the course materials before answering questions.  \n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.\nReplace it with the full path to the GitHub repository:\n\"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "tools": [
+    "search"
+  ],
+  "messages": [
+    {
+      "parts": [
+        {
+          "content": "can i enroll to course after the class started?",
+          "timestamp": "2025-10-08T09:01:43.593492+00:00",
+          "part_kind": "user-prompt"
+        }
+      ],
+      "instructions": "You are a helpful assistant that answers questions about documentation.  \n\nUse the search tool to find relevant information from the course materials before answering questions.  \n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.\nReplace it with the full path to the GitHub repository:\n\"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search",
+          "args": "{\"query\":\"enroll after class started\"}",
+          "tool_call_id": "call_qmuWFvEk0J7fhoYTaEg3QssU",
+          "part_kind": "tool-call"
+        }
+      ],
+      "usage": {
+        "input_tokens": 212,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 17,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2025-10-08T09:01:45+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_details": {
+        "finish_reason": "tool_calls"
+      },
+      "provider_response_id": "chatcmpl-COKLJUM1Q8QuVVYY1eSWwm55Vn2iE",
+      "finish_reason": "tool_call"
+    },
+    {
+      "parts": [
+        {
+          "tool_name": "search",
+          "content": [
+            {
+              "id": "4ee3b7231a",
+              "question": "Docker-Compose: Error getting credentials after running docker-compose up -d",
+              "sort_order": 47,
+              "content": "Installing pass via `sudo apt install pass` helped to solve the issue. More about this can be found here: [https://github.com/moby/buildkit/issues/1078](https://github.com/moby/buildkit/issues/1078)",
+              "filename": "_questions/data-engineering-zoomcamp/module-1/047_4ee3b7231a_docker-compose-error-getting-credentials-after-run.md"
+            },
+            {
+              "id": "068529125b",
+              "question": "Course - Can I follow the course after it finishes?",
+              "sort_order": 8,
+              "content": "Yes, we will keep all the materials available, so you can follow the course at your own pace after it finishes.\n\nYou can also continue reviewing the homeworks and prepare for the next cohort. You can also start working on your final capstone project.",
+              "filename": "_questions/data-engineering-zoomcamp/general/008_068529125b_course-can-i-follow-the-course-after-it-finishes.md"
+            },
+            {
+              "id": "05aad03ef3",
+              "question": "Invalid data types after Ingesting FHV data through parquet files: Could not parse SR_Flag as Float64, Couldn\u2019t parse datetime column as timestamp, couldn\u2019t handle NULL values in PULocationID, DOLocationID",
+              "sort_order": 76,
+              "content": "If you uploaded the FHV 2019 parquet files manually after downloading from [this source](https://d37ci6vzurychx.cloudfront.net/trip-data/fhv_tripdata_2019-*.parquet), you may face errors regarding data types while loading the data into a landing table (e.g., `fhv_tripdata`). To avoid these errors, create an external table with the schema defined as follows and load each month in a loop:\n\n```sql\nCREATE OR REPLACE EXTERNAL TABLE `dw-bigquery-week-3.trips_data_all.external_tlc_fhv_trips_2019` (\n\n  dispatching_base_num STRING,\n\n  pickup_datetime TIMESTAMP,\n\n  dropoff_datetime TIMESTAMP,\n\n  PUlocationID FLOAT64,\n\n  DOlocationID FLOAT64,\n\n  SR_Flag FLOAT64,\n\n  Affiliated_base_number STRING\n\n)\n\nOPTIONS (\n\n  format = 'PARQUET',\n\n  uris = ['gs://project id/fhv_2019_8.parquet']\n\n);\n```\n\nYou can also use:\n\n```sql\nuris = ['gs://project id/fhv_2019_*.parquet']\n```\n\nThis approach removes the need for a loop and allows you to process all months in a single run.",
+              "filename": "_questions/data-engineering-zoomcamp/module-4/076_05aad03ef3_invalid-data-types-after-ingesting-fhv-data-throug.md"
+            },
+            {
+              "id": "e43abaa421",
+              "question": "Docker: docker-compose still not available after changing .bashrc",
+              "sort_order": 46,
+              "content": "This issue can occur after installing Docker Compose in a Google Cloud VM, as demonstrated in video 1.4.1. \n\nIf the downloaded Docker Compose file from GitHub is named `docker-compose-linux-x86_64`, you may need to rename it for convenience. Here's how to resolve the issue:\n\n1. Rename `docker-compose-linux-x86_64` to `docker-compose` using the following command:\n   \n   ```bash\n   mv docker-compose-linux-x86_64 docker-compose\n   ```\n\nBy doing this, you can use the `docker-compose` command directly.",
+              "filename": "_questions/data-engineering-zoomcamp/module-1/046_e43abaa421_docker-docker-compose-still-not-available-after-ch.md"
+            },
+            {
+              "id": "0cfd7f7ed6",
+              "question": "pgAdmin - Blank/white screen after login (browser)",
+              "sort_order": 79,
+              "content": "Using GitHub Codespaces in the browser resulted in a blank screen after logging into pgAdmin (running in a Docker container). The terminal of the pgAdmin container was showing the following error message:\n\n```\nCSRFError: 400 Bad Request: The referrer does not match the host.\n```\n\n### Solution #1:\n\nAs recommended in the following issue: [GitHub Issue #5432](https://github.com/pgadmin-org/pgadmin4/issues/5432), setting the following environment variable solved it:\n\n```bash\ndocker run --rm -it \\\n  -e PGADMIN_DEFAULT_EMAIL=\"admin@admin.com\" \\\n  -e PGADMIN_DEFAULT_PASSWORD=\"root\" \\\n  -e PGADMIN_CONFIG_WTF_CSRF_ENABLED=\"False\" \\\n  -p \"8080:80\" \\\n  --name pgadmin \\\n  --network=pg-network \\\n  dpage/pgadmin4:8.2\n```\n\n### Solution #2:\n\nUsing the locally installed VSCode to display GitHub Codespaces. When using GitHub Codespaces in the locally installed VSCode (opening a Codespace or creating/starting one), this issue did not occur.",
+              "filename": "_questions/data-engineering-zoomcamp/module-1/079_0cfd7f7ed6_pgadmin-blankwhite-screen-after-login-browser.md"
+            }
+          ],
+          "tool_call_id": "call_qmuWFvEk0J7fhoYTaEg3QssU",
+          "metadata": null,
+          "timestamp": "2025-10-08T09:01:46.112551+00:00",
+          "part_kind": "tool-return"
+        }
+      ],
+      "instructions": "You are a helpful assistant that answers questions about documentation.  \n\nUse the search tool to find relevant information from the course materials before answering questions.  \n\nIf you can find specific information through search, use it to provide accurate answers.\n\nAlways include references by citing the filename of the source material you used.\nReplace it with the full path to the GitHub repository:\n\"https://github.com/DataTalksClub/faq/blob/main/\"\nFormat: [LINK TITLE](FULL_GITHUB_LINK)\n\n\nIf the search doesn't return relevant results, let the user know and provide general guidance.",
+      "kind": "request"
+    },
+    {
+      "parts": [
+        {
+          "content": "The search did not return specific information regarding enrolling in a course after it has started. However, generally speaking, policies on enrollment after a course has begun can vary by institution or program.\n\nFor exact information regarding your course, I recommend checking the course guidelines or reaching out directly to the course administrators. If the materials are still available, you can often catch up with recorded sessions or self-guided content after the course officially starts. \n\nIf you have any specific course details or context, feel free to share, and I may be able to assist you further!",
+          "id": null,
+          "part_kind": "text"
+        }
+      ],
+      "usage": {
+        "input_tokens": 1391,
+        "cache_write_tokens": 0,
+        "cache_read_tokens": 0,
+        "output_tokens": 112,
+        "input_audio_tokens": 0,
+        "cache_audio_read_tokens": 0,
+        "output_audio_tokens": 0,
+        "details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "model_name": "gpt-4o-mini-2024-07-18",
+      "timestamp": "2025-10-08T09:01:46+00:00",
+      "kind": "response",
+      "provider_name": "openai",
+      "provider_details": {
+        "finish_reason": "stop"
+      },
+      "provider_response_id": "chatcmpl-COKLK4mBavVw3c4Bp3tkigx6CWYop",
+      "finish_reason": "stop"
+    }
+  ],
+  "source": "user"
+}
